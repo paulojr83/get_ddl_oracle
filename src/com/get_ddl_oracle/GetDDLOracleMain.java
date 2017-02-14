@@ -14,7 +14,7 @@ public class GetDDLOracleMain {
 
 	public void findObjectOracle() {
 		Connection connection = null; 
-		String sql = "select OBJECT_NAME ,OBJECT_TYPE from ALL_OBJECTS where object_type in('TABLE','PROCEDURE','PACKAGE BODY', 'PACKAGE','FUNCTION','TRIGGER','VIEW','SEQUENCE') and owner = 'COCKPIT'";
+		String sql = "select OBJECT_NAME ,OBJECT_TYPE from ALL_OBJECTS where object_type in('TABLE','PROCEDURE','PACKAGE BODY', 'PACKAGE','FUNCTION','TRIGGER','VIEW','SEQUENCE') and owner = 'USER_OWNER_DATA_BASE'";
 		try {
 			connection = Conn.getConnection();
 			stmt = connection.createStatement();
@@ -44,7 +44,7 @@ public class GetDDLOracleMain {
 	}
 	
 	private void getDDL(String objectName, String objectType){
-		String sql = "select dbms_metadata.get_ddl('"+objectType+"', '"+objectName+"', 'COCKPIT') as ddl from dual";
+		String sql = "select dbms_metadata.get_ddl('"+objectType+"', '"+objectName+"', 'USER_OWNER_DATA_BASE') as ddl from dual";
 		try {
 			Connection connection = Conn.getConnection();
 			stmt = connection.createStatement();
